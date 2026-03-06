@@ -115,11 +115,11 @@ export default function Landing() {
                             <span style={{ color: '#0097A7', margin: '0 12px', fontSize: '1.2rem' }}>🤍</span>
                             <span style={{ color: '#0097A7' }}>Arlon</span>
                         </p>
-                        
+
                     </div>
                 </motion.div>
 
-                
+
 
                 {/* Info card */}
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}
@@ -135,9 +135,9 @@ export default function Landing() {
                     </p>
                     <ul className="mt-5 space-y-2">
                         {[
-                            '✅ Ilagay ang Full name at Date of Birth, ',
-                            '✅ Upload ang pangmalakasang valid ID',
-                            '✅ Idagdag ang iba pang myembro ng pamilya',
+                            '✅ Ilagay ang Full name at Date of Birth.',
+                            '✅ Upload ang pangmalakasang valid ID.',
+                            '✅ Idagdag ang iba pang myembro ng pamilya.',
                         ].map(item => (
                             <li key={item} className="text-sm font-semibold flex gap-2" style={{ color: '#004D63' }}>{item}</li>
                         ))}
