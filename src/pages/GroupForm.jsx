@@ -80,6 +80,14 @@ function TravelerForm({ onSave, onCancel, initialData, isFirst }) {
         let valid = true
         if (!data.fullName.trim()) { err('fullName', 'Full name is required'); valid = false }
         if (!data.dob) { err('dob', 'Date of birth is required'); valid = false }
+        else if (!/^\d{2}\/\d{2}\/\d{4}$/.test(data.dob)) { err('dob', 'Format must be MM/DD/YYYY'); valid = false }
+        else {
+            const [m, d, y] = data.dob.split('/').map(Number)
+            const date = new Date(y, m - 1, d)
+            const today = new Date()
+            if (date > today) { err('dob', 'Birth date cannot be in the future'); valid = false }
+            if (m < 1 || m > 12 || d < 1 || d > 31) { err('dob', 'Invalid date'); valid = false }
+        }
         if (!data.placeOfBirth.trim()) { err('placeOfBirth', 'Place of birth is required'); valid = false }
         if (valid && !initialData) {
             setChecking(true)
@@ -157,10 +165,19 @@ function TravelerForm({ onSave, onCancel, initialData, isFirst }) {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-bold mb-2" style={labelC}>Date of Birth <span style={{ color: '#C0392B' }}>*</span></label>
-                                <input type="date" className="w-full rounded-2xl px-4 py-3 text-sm font-medium outline-none"
+                                <input type="text" className="w-full rounded-2xl px-4 py-3 text-sm font-medium outline-none"
                                     style={{ background: 'rgba(255,255,255,0.70)', border: '1.5px solid rgba(0,188,212,0.4)', color: '#003D5B' }}
-                                    value={data.dob} max={new Date().toISOString().split('T')[0]}
-                                    onChange={e => { set('dob', e.target.value); clearErr('dob') }} />
+                                    placeholder="MM/DD/YYYY"
+                                    value={data.dob}
+                                    onChange={e => {
+                                        let val = e.target.value.replace(/\D/g, '') // numbers only
+                                        if (val.length > 8) val = val.slice(0, 8)
+                                        let formatted = val
+                                        if (val.length > 2) formatted = val.slice(0, 2) + '/' + val.slice(2)
+                                        if (val.length > 4) formatted = formatted.slice(0, 5) + '/' + formatted.slice(5)
+                                        set('dob', formatted)
+                                        clearErr('dob')
+                                    }} />
                                 {errors.dob && <p className="text-xs mt-1 font-medium" style={{ color: '#C0392B' }}>{errors.dob}</p>}
                             </div>
                             <div>
@@ -510,12 +527,7 @@ export default function GroupForm() {
                                                         {i === 0 && <span className="text-xs px-2 py-0.5 rounded-full font-semibold" style={{ background: '#F4C244', color: '#003D5B' }}>You</span>}
                                                     </div>
                                                     <p className="text-xs" style={{ color: 'rgba(0,61,91,0.65)' }}>
-                                                        {(() => {
-                                                            const d = new Date(t.dob)
-                                                            const m = String(d.getMonth() + 1).padStart(2, '0')
-                                                            const day = String(d.getDate()).padStart(2, '0')
-                                                            return `${m}/${day}/${d.getFullYear()}`
-                                                        })()} · {t.placeOfBirth}
+                                                        {data.dob} · {t.placeOfBirth}
                                                     </p>
                                                 </div>
                                                 <span className={`shrink-0 text-xs px-2 py-1 rounded-full font-bold`} style={t.hasBudget ? { background: '#00BCD4', color: '#003D5B' } : { background: '#FF6B6B', color: '#fff' }}>
