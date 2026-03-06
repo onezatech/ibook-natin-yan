@@ -16,7 +16,13 @@ function flattenTravelers(groups) {
 
 function formatDate(dob) {
     if (!dob) return '—'
-    try { return new Date(dob).toLocaleDateString('en-PH', { dateStyle: 'medium' }) } catch { return dob }
+    try {
+        const d = new Date(dob)
+        const m = String(d.getMonth() + 1).padStart(2, '0')
+        const day = String(d.getDate()).padStart(2, '0')
+        const y = d.getFullYear()
+        return `${m}/${day}/${y}`
+    } catch { return dob }
 }
 
 function formatSubmittedAt(ts) {

@@ -509,7 +509,14 @@ export default function GroupForm() {
                                                         <p className="font-bold" style={{ color: '#003D5B' }}>{t.fullName}</p>
                                                         {i === 0 && <span className="text-xs px-2 py-0.5 rounded-full font-semibold" style={{ background: '#F4C244', color: '#003D5B' }}>You</span>}
                                                     </div>
-                                                    <p className="text-xs" style={{ color: 'rgba(0,61,91,0.65)' }}>{new Date(t.dob).toLocaleDateString('en-PH', { dateStyle: 'medium' })} · {t.placeOfBirth}</p>
+                                                    <p className="text-xs" style={{ color: 'rgba(0,61,91,0.65)' }}>
+                                                        {(() => {
+                                                            const d = new Date(t.dob)
+                                                            const m = String(d.getMonth() + 1).padStart(2, '0')
+                                                            const day = String(d.getDate()).padStart(2, '0')
+                                                            return `${m}/${day}/${d.getFullYear()}`
+                                                        })()} · {t.placeOfBirth}
+                                                    </p>
                                                 </div>
                                                 <span className={`shrink-0 text-xs px-2 py-1 rounded-full font-bold`} style={t.hasBudget ? { background: '#00BCD4', color: '#003D5B' } : { background: '#FF6B6B', color: '#fff' }}>
                                                     {t.hasBudget ? '💰' : '🙏'}
