@@ -1,7 +1,7 @@
 {
   "projects": {
     "default": "ibook-natin-yan",
-    "prod": "bohol-we-go"
+    "prod": "ibook-natin-yan"
   },
   "targets": {},
   "etags": {}

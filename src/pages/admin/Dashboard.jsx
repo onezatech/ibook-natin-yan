@@ -55,7 +55,7 @@ function exportCSV(groups) {
     const blob = new Blob([csv], { type: 'text/csv' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a'); a.href = url
-    a.download = `bohol-we-go-${new Date().toISOString().slice(0, 10)}.csv`
+    a.download = `ibook-natin-yan-${new Date().toISOString().slice(0, 10)}.csv`
     a.click(); URL.revokeObjectURL(url)
 }
 
@@ -66,7 +66,7 @@ function exportExcel(groups) {
     ws['!cols'] = EXPORT_HEADERS.map(() => ({ wch: 22 }))
     const wb = XLSX.utils.book_new()
     XLSX.utils.book_append_sheet(wb, ws, 'Travelers')
-    XLSX.writeFile(wb, `bohol-we-go-${new Date().toISOString().slice(0, 10)}.xlsx`)
+    XLSX.writeFile(wb, `ibook-natin-yan-${new Date().toISOString().slice(0, 10)}.xlsx`)
 }
 
 // Google Sheets: export as CSV then open Google Sheets import URL

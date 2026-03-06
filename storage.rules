@@ -1,10 +1,12 @@
 rules_version = '2';
+
+// Craft rules based on data in your Firestore database
+// allow write: if firestore.get(
+//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
 service firebase.storage {
   match /b/{bucket}/o {
-    // Allow public upload under 5MB (image/PDF)
-    match /ids/{groupId}/{travelerId} {
-      allow create: if request.resource.size < 5 * 1024 * 1024;
-      allow read: if request.auth != null;
+    match /{allPaths=**} {
+      allow read, write: if false;
     }
   }
 }
