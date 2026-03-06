@@ -1,10 +1,20 @@
 rules_version = '2';
 
-// Craft rules based on data in your Firestore database
-// allow write: if firestore.get(
-//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
 service firebase.storage {
   match /b/{bucket}/o {
+
+    // ID images uploaded during group form submission (no auth required to write).
+    // Admins (authenticated users) can read and delete.
+    match /ids/{groupId}/{travelerId} {
+      // Anyone can upload an ID photo (public form — no login required)
+      allow write: if request.resource.size < 10 * 1024 * 1024   // max 10 MB
+                   && request.resource.contentType.matches('image/.*');
+
+      // Only authenticated users (admins) can read or delete
+      allow read, delete: if request.auth != null;
+    }
+
+    // Deny everything else
     match /{allPaths=**} {
       allow read, write: if false;
     }
