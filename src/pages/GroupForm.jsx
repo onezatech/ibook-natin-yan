@@ -527,7 +527,7 @@ export default function GroupForm() {
                                                         {i === 0 && <span className="text-xs px-2 py-0.5 rounded-full font-semibold" style={{ background: '#F4C244', color: '#003D5B' }}>You</span>}
                                                     </div>
                                                     <p className="text-xs" style={{ color: 'rgba(0,61,91,0.65)' }}>
-                                                        {data.dob} · {t.placeOfBirth}
+                                                        {t.dob} · {t.placeOfBirth}
                                                     </p>
                                                 </div>
                                                 <span className={`shrink-0 text-xs px-2 py-1 rounded-full font-bold`} style={t.hasBudget ? { background: '#00BCD4', color: '#003D5B' } : { background: '#FF6B6B', color: '#fff' }}>
