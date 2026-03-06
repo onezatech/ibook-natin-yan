@@ -115,20 +115,11 @@ export default function Landing() {
                             <span style={{ color: '#0097A7', margin: '0 12px', fontSize: '1.2rem' }}>🤍</span>
                             <span style={{ color: '#0097A7' }}>Arlon</span>
                         </p>
-                        <p className="text-sm font-bold uppercase tracking-widest mt-1" style={{ color: '#005F73' }}>
-                            December 22, 2026 · Bohol, Philippines
-                        </p>
+                        
                     </div>
                 </motion.div>
 
-                {/* Countdown */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }}
-                    className="mb-10">
-                    <p className="text-sm font-bold uppercase tracking-widest mb-4" style={{ color: '#E0F7FA', textShadow: '0 1px 4px rgba(0,60,100,0.3)' }}>
-                        Oras na natitira 👇, Pero mas maganda mas maaga tayo makapag book para makamura sa ticket.
-                    </p>
-                    <Countdown />
-                </motion.div>
+                
 
                 {/* Info card */}
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}
