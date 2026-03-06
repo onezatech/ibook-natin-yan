@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "bohol-we-go",
+    "prod": "bohol-we-go"
+  },
+  "targets": {},
+  "etags": {}
+}

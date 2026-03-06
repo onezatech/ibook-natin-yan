@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Groups collection — public can create, only admin can read/update/delete
+    match /groups/{groupId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+
+      // Travelers subcollection
+      // Public can CREATE (submit) and READ (for duplicate name check)
+      // Only admin can update or delete
+      match /travelers/{travelerId} {
+        allow create, read: if true;
+        allow update, delete: if request.auth != null;
+      }
+    }
+
+    // Allow collectionGroup queries on 'travelers' for duplicate name checking
+    match /{path=**}/travelers/{travelerId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
